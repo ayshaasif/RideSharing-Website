@@ -11,22 +11,57 @@ const Map = ()=>{
      const [startLocResults, setstartLocResults] =  useState([]);
      const [endLocResults, setendLocResults] =  useState([]);
 
-     const mapContainer = useRef(null);
-     const map = useRef(null);
      const uaeCoordinates = { lng: 53.8478, lat: 23.4241 };
-     const zoom = 9;
+     const [userLocation, setUserLocation] = useState(uaeCoordinates);
+
+     const mapContainer = useRef(null);
+     const markerRef = useRef(null);  // Reference for the user location marker
+
+     const map = useRef(null);
+     const zoom = 15;
      let MAPTILER_API_KEY = 'CHu7tXAwNPfvbEFYVX60'
      maptilersdk.config.apiKey = MAPTILER_API_KEY;
+
+     useEffect(() => {
+        // Get user's current location
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setUserLocation({ lat: latitude, lng: longitude });
+          },
+          () => {
+            console.warn("Location access denied or unavailable, using default location.");
+          }
+        );
+      }, []);
+      
      useEffect(() => {
         if (map.current) return; // stops map from intializing more than once
       
         map.current = new maptilersdk.Map({
           container: mapContainer.current,
           style: maptilersdk.MapStyle.STREETS,
-          center: [uaeCoordinates.lng, uaeCoordinates.lat],
+          center:  [userLocation.lng, userLocation.lat],
           zoom: zoom
         });      
       }, [uaeCoordinates.lng, uaeCoordinates.lat, zoom]);
+
+
+      useEffect(() => {
+        if (map.current) {
+          map.current.setCenter([userLocation.lng, userLocation.lat]);
+        }
+
+        if(markerRef.current){
+            markerRef.current.remove();
+        }
+
+        markerRef.current = new maptilersdk.Marker()
+                                .setLngLat([userLocation.lng,userLocation.lat])
+                                .addTo(map.current);
+      }, [userLocation]);
+
+
 
     useEffect (()=>{
         if (startloc.length > 2){

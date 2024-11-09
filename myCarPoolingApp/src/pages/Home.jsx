@@ -5,7 +5,7 @@ import '../index.css';
 const Home = () => {
   return (
     <div className="home">
-      <h1>Welcome to LosGehts!</h1>
+      <h1>Yalla!</h1>
       <h2>Where do you want to Go?</h2>
       {/* home  options go here */}
       <Map></Map>
