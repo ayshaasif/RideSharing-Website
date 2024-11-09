@@ -19,7 +19,7 @@ const Map = ()=>{
 
      const map = useRef(null);
      const zoom = 15;
-     let MAPTILER_API_KEY = 'CHu7tXAwNPfvbEFYVX60'
+     const MAPTILER_API_KEY = process.env.MAPTILER_API_KEY;
      maptilersdk.config.apiKey = MAPTILER_API_KEY;
 
      useEffect(() => {
@@ -37,14 +37,14 @@ const Map = ()=>{
       
      useEffect(() => {
         if (map.current) return; // stops map from intializing more than once
-      
+        console.log(userLocation);
         map.current = new maptilersdk.Map({
           container: mapContainer.current,
           style: maptilersdk.MapStyle.STREETS,
           center:  [userLocation.lng, userLocation.lat],
           zoom: zoom
         });      
-      }, [uaeCoordinates.lng, uaeCoordinates.lat, zoom]);
+      }, []);
 
 
       useEffect(() => {
