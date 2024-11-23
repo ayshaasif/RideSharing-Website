@@ -22,7 +22,8 @@ const createTrip = async(req,res) => {
     if(!req?.body){
         return res.status(400).json({"message":"fields required"});
     }
-    const {driver_id, vehicle_model, v_license_plate, v_color,start_loc, end_loc, num_Seats, price_ps,trip_day} =  req.body;
+    const {driver_id, vehicle_model, v_license_plate, v_color,start_location, end_location, num_Seats, price_ps,start_time} =  req.body;
+    console.log("start_location : ", start_location,start_location.length);
     try {
         // Create a new trip document
         const trip = await Trip.create({
@@ -33,16 +34,16 @@ const createTrip = async(req,res) => {
                 color: v_color
             },
             route: {
-                start_location: start_loc,
-                end_location: end_loc
+                start_location: {type : 'Point', coordinates  : start_location},
+                end_location:  {type : 'Point', coordinates  : end_location}
             },
-            seats_available: num_Seats,
+            total_seats: num_Seats,
             price_per_seat: price_ps,
-            date_time: new Date(trip_day),
+            start_date_time: start_time,
             carpool_route: {
-                waypoints: waypoints || [],
-                distance: distance || null,
-                duration: duration || null
+                waypoints:  [],
+                distance:  0,
+                duration: 0
             },
             bookings: [],  // initialize with an empty array if no bookings yet
             status: 'scheduled'  // default value

@@ -1,10 +1,9 @@
-require('dotenv').config();
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
-import RideList from './features/rides/RideList';
+import TripList from './features/trip/TripList';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Home from './pages/Home';
@@ -21,7 +20,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/rides" element={<RideList />} />
+            <Route path="/trips" element={<TripList />} />
           </Routes>
         </div>
       </div>

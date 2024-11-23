@@ -1,0 +1,41 @@
+{
+    "message": "Trip created successfully",
+    "trip": {
+        "driver_id": "66d17b5ab9164fedcfe680e3",
+        "vehicle": {
+            "model": "toyota camrey",
+            "license_plate": "X 12345",
+            "color": "Black"
+        },
+        "route": {
+            "start_location": {
+                "type": "Point",
+                "coordinates": [
+                    56.07928376644849,
+                    24.821248935505945
+                ],
+                "_id": "6738260513abfaa0ef5005f3"
+            },
+            "end_location": {
+                "type": "Point",
+                "coordinates": [
+                    56.07928376644849,
+                    25.30504088540736
+                ],
+                "_id": "6738260513abfaa0ef5005f4"
+            }
+        },
+        "total_seats": 30,
+        "price_per_seat": 50,
+        "start_date_time": "2024-11-15T10:00:00.000Z",
+        "bookings": [],
+        "carpool_route": {
+            "waypoints": [],
+            "distance": 0,
+            "duration": 0
+        },
+        "status": "scheduled",
+        "_id": "6738260513abfaa0ef5005f2",
+        "__v": 0
+    }
+}   
